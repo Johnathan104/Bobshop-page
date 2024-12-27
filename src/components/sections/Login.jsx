@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { auth } from "../../firebase";
-import {createUserWithEmailAndPassword} from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js';
+import {signInWithEmailAndPassword, createUserWithEmailAndPassword} from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js';
 
 export default function Login() {
     const [password, setPassword] = useState("")
@@ -16,6 +16,14 @@ export default function Login() {
     const clear=()=>{
         setEmail("")
         setPassword("")
+    }
+    const signIn =(e)=>{
+        e.preventDefault()
+        console.log("sign in function pressed")
+        signInWithEmailAndPassword(auth, email, password)
+        .then(()=>alert("signed in"))
+        .catch(()=>alert("failed to sign in"))
+        
     }
     const signUp= (e)=>{
         e.preventDefault()
@@ -34,7 +42,7 @@ export default function Login() {
                 <h1>Login</h1>
             </div>
             <div className="py-3">
-                <form action="pages/login.php" method="POST">
+                <form onSubmit={signIn} method="POST">
                     <div className="row my-5">
                         <span>Email</span>
                         <div className="input-group">
