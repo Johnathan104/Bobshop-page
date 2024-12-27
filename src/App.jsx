@@ -83,7 +83,7 @@ function App() {
       }
      
 
-    });
+    },[uid]);
     return () => unsubscribe(); // Cleanup subscription on unmount
   });
   return (
